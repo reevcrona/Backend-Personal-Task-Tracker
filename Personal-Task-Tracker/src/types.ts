@@ -11,6 +11,7 @@ export interface TaskProps {
   task: TaskType;
   deleteTask: (taskItem: TaskType) => void;
   completeTask: (taskItem: TaskType) => void;
+  undoTask: (taskItem: TaskType) => void;
   setTaskToEdit: React.Dispatch<React.SetStateAction<TaskType | null>>;
   setIsEditModeActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLightboxOpen: React.Dispatch<React.SetStateAction<boolean>>;

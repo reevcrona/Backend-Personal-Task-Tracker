@@ -54,7 +54,14 @@ const App = () => {
     setIsLightboxOpen(false);
     setIsEditModeActive(false);
   };
-
+  const undoTask = (taskItem: TaskType): void => {
+    deleteTask(taskItem);
+    const updatedTask: TaskType = {
+      ...taskItem,
+      isCompleted: !taskItem.isCompleted,
+    };
+    addTask(updatedTask);
+  };
   const renderTasks = (taskList: TaskType[]): JSX.Element[] => {
     return taskList.map((taskItem) => (
       <Task
@@ -62,6 +69,7 @@ const App = () => {
         task={taskItem}
         deleteTask={deleteTask}
         completeTask={completeTask}
+        undoTask={undoTask}
         setIsEditModeActive={setIsEditModeActive}
         setIsLightboxOpen={setIsLightboxOpen}
         setTaskToEdit={setTaskToEdit}

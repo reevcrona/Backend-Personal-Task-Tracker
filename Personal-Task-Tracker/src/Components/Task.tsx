@@ -1,11 +1,13 @@
 import { TaskProps } from "../types";
 import { TiDeleteOutline, TiEdit } from "react-icons/ti";
 import { IoIosCheckmarkCircle } from "react-icons/io";
+import { CiUndo } from "react-icons/ci";
 
 const Task = ({
   task,
   deleteTask,
   completeTask,
+  undoTask,
   setTaskToEdit,
   setIsEditModeActive,
   setIsLightboxOpen,
@@ -23,15 +25,22 @@ const Task = ({
           <IoIosCheckmarkCircle />
         </button>
       )}
-      <button
-        onClick={() => {
-          setTaskToEdit(task);
-          setIsEditModeActive(true);
-          setIsLightboxOpen(true);
-        }}
-      >
-        <TiEdit />
-      </button>
+      {!task.isCompleted && (
+        <button
+          onClick={() => {
+            setTaskToEdit(task);
+            setIsEditModeActive(true);
+            setIsLightboxOpen(true);
+          }}
+        >
+          <TiEdit />
+        </button>
+      )}
+      {task.isCompleted && (
+        <button onClick={() => undoTask(task)}>
+          <CiUndo />
+        </button>
+      )}
     </div>
   );
 };
