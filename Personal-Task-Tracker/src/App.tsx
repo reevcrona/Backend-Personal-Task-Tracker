@@ -1,7 +1,20 @@
 import React from "react";
-
+import { useState } from "react";
+import { TaskType } from "./types";
+import Task from "./Components/Task";
+import TaskInput from "./Components/TaskInput";
 const App = () => {
-  return <h1>Personal task tracker</h1>;
+  const [taskList, setTaskList] = useState<TaskType[]>([]);
+
+  const addTask = (taskItem: TaskType) => {
+    setTaskList((prevState) => [...prevState, taskItem]);
+  };
+
+  return (
+    <div>
+      <TaskInput />
+    </div>
+  );
 };
 
 export default App;
