@@ -1,12 +1,14 @@
 import { TaskProps } from "../types";
 import { TiDeleteOutline } from "react-icons/ti";
-const Task = ({ title, description, category }: TaskProps) => {
+const Task = ({ task, deleteTask }: TaskProps) => {
   return (
     <div>
-      <h1>{title}</h1>
-      <h3>{category}</h3>
-      <h4>{description}</h4>
-      <TiDeleteOutline />
+      <h1>{task.title}</h1>
+      <h3>{task.category}</h3>
+      <h4>{task.description}</h4>
+      <button onClick={() => deleteTask(task)}>
+        <TiDeleteOutline />
+      </button>
     </div>
   );
 };

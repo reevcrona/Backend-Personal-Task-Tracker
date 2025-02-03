@@ -12,14 +12,13 @@ const App = () => {
     setTaskList((prevState) => [...prevState, taskItem]);
     setIsLightboxOpen(false);
   };
+  const deleteTask = (taskItem: TaskType): void => {
+    setTaskList((prevState) =>
+      prevState.filter((task) => task.id !== taskItem.id)
+    );
+  };
   const renderTasks: JSX.Element[] = taskList.map((item) => (
-    <Task
-      key={item.id}
-      title={item.title}
-      id={item.id}
-      description={item.description}
-      category={item.category}
-    />
+    <Task task={item} key={item.id} deleteTask={deleteTask} />
   ));
   return (
     <div>

@@ -5,10 +5,8 @@ export interface TaskType {
   category: string;
 }
 export interface TaskProps {
-  title: string;
-  id: string;
-  description: string;
-  category: string;
+  task: TaskType;
+  deleteTask: (taskItem: TaskType) => void;
 }
 export interface taskInputProps {
   InputAddTask: (task: TaskType) => void;
