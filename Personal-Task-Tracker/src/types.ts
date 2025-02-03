@@ -8,3 +8,6 @@ export interface TaskProps {
   id: string;
   description: string;
 }
+export interface taskInputProps {
+  InputAddTask: (task: TaskType) => void;
+}
