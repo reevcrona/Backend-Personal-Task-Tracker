@@ -15,6 +15,7 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
       id: nanoid(),
       description: descInputValue,
       category: categoryInputValue,
+      isCompleted: false,
     };
     InputAddTask(newTask);
     setTitleInputValue("");

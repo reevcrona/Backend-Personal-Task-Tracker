@@ -1,6 +1,8 @@
 import { TaskProps } from "../types";
 import { TiDeleteOutline } from "react-icons/ti";
-const Task = ({ task, deleteTask }: TaskProps) => {
+import { IoIosCheckmarkCircle } from "react-icons/io";
+
+const Task = ({ task, deleteTask, completeTask }: TaskProps) => {
   return (
     <div>
       <h1>{task.title}</h1>
@@ -9,6 +11,11 @@ const Task = ({ task, deleteTask }: TaskProps) => {
       <button onClick={() => deleteTask(task)}>
         <TiDeleteOutline />
       </button>
+      {!task.isCompleted && (
+        <button onClick={() => completeTask(task)}>
+          <IoIosCheckmarkCircle />
+        </button>
+      )}
     </div>
   );
 };
