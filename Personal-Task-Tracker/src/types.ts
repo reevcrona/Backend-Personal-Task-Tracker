@@ -11,3 +11,6 @@ export interface TaskProps {
 export interface taskInputProps {
   InputAddTask: (task: TaskType) => void;
 }
+export interface LightboxProps {
+  children: JSX.Element;
+}

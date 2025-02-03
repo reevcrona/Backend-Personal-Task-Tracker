@@ -14,6 +14,7 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
       description: "first task",
     };
     InputAddTask(newTask);
+    setInputValue("");
   };
 
   const onchangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +26,8 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
       <label htmlFor="task-input"></label>
       <input
         id="task-input"
+        required
+        minLength={1}
         placeholder="Add task here"
         onChange={(e) => onchangeHandler(e)}
         value={inputValue}

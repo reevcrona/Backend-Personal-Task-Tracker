@@ -3,9 +3,11 @@ import { useState } from "react";
 import { TaskType } from "./types";
 import Task from "./Components/Task";
 import TaskInput from "./Components/TaskInput";
-import { render } from "react-dom";
+import Lightbox from "./Components/Lightbox";
+
 const App = () => {
   const [taskList, setTaskList] = useState<TaskType[]>([]);
+  const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
 
   const addTask = (taskItem: TaskType): void => {
     setTaskList((prevState) => [...prevState, taskItem]);
@@ -20,8 +22,10 @@ const App = () => {
   ));
   return (
     <div>
-      <TaskInput InputAddTask={addTask} />
       {renderTasks}
+      <Lightbox>
+        <TaskInput InputAddTask={addTask} />
+      </Lightbox>
     </div>
   );
 };
