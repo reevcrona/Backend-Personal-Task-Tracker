@@ -4,33 +4,47 @@ import { nanoid } from "nanoid";
 import { taskInputProps, TaskType } from "../types";
 
 const TaskInput = ({ InputAddTask }: taskInputProps) => {
-  const [inputValue, setInputValue] = useState<string>("");
+  const [titleInputValue, setTitleInputValue] = useState<string>("");
+  const [descInputValue, setDescInputValue] = useState<string>("");
 
   const addTaskToList = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const newTask: TaskType = {
-      title: inputValue,
+      title: titleInputValue,
       id: nanoid(),
-      description: "first task",
+      description: descInputValue,
     };
     InputAddTask(newTask);
-    setInputValue("");
+    setTitleInputValue("");
+    setDescInputValue("");
   };
 
-  const onchangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+  const onchangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    stateSetter: React.Dispatch<React.SetStateAction<string>>
+  ): void => {
+    stateSetter(e.target.value);
   };
 
   return (
     <form onSubmit={(e) => addTaskToList(e)}>
-      <label htmlFor="task-input"></label>
+      <label htmlFor="title-input">Title</label>
       <input
-        id="task-input"
+        id="title-input"
+        type="text"
         required
         minLength={1}
-        placeholder="Add task here"
-        onChange={(e) => onchangeHandler(e)}
-        value={inputValue}
+        placeholder="Task Title"
+        onChange={(e) => onchangeHandler(e, setTitleInputValue)}
+        value={titleInputValue}
+      ></input>
+      <label htmlFor="description-input"></label>
+      <input
+        id="description-input"
+        type="text"
+        placeholder="Task Description"
+        onChange={(e) => onchangeHandler(e, setDescInputValue)}
+        value={descInputValue}
       ></input>
       <button type="submit">Add</button>
     </form>

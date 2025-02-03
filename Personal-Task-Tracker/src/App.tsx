@@ -11,6 +11,7 @@ const App = () => {
 
   const addTask = (taskItem: TaskType): void => {
     setTaskList((prevState) => [...prevState, taskItem]);
+    setIsLightboxOpen(false);
   };
   const renderTasks: JSX.Element[] = taskList.map((item) => (
     <Task
@@ -23,9 +24,14 @@ const App = () => {
   return (
     <div>
       {renderTasks}
-      <Lightbox>
-        <TaskInput InputAddTask={addTask} />
-      </Lightbox>
+      <div onClick={() => setIsLightboxOpen(true)}>
+        <h1>Click here</h1>
+        {isLightboxOpen && (
+          <Lightbox>
+            <TaskInput InputAddTask={addTask} />
+          </Lightbox>
+        )}
+      </div>
     </div>
   );
 };
