@@ -8,7 +8,8 @@ const App = () => {
   const [taskList, setTaskList] = useState<TaskType[]>([]);
   const [completedTaskList, setCompletedTaskList] = useState<TaskType[]>([]);
   const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
-
+  const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
+  const [taskToEdit, setTaskToEdit] = useState<TaskType | null>(null);
   const addTask = (taskItem: TaskType): void => {
     setTaskList((prevState) => [...prevState, taskItem]);
     setIsLightboxOpen(false);
@@ -30,6 +31,30 @@ const App = () => {
       prevState.filter((item) => item.id !== taskItem.id)
     );
   };
+  const editTask = (
+    taskItem: TaskType,
+    titleInput: string,
+    descInput: string,
+    categoryInput: string,
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+    setTaskList((prevState) =>
+      prevState.map((item) =>
+        item.id === taskItem.id
+          ? {
+              ...item,
+              title: titleInput,
+              description: descInput,
+              category: categoryInput,
+            }
+          : taskItem
+      )
+    );
+    setIsLightboxOpen(false);
+    setIsEditModeActive(false);
+  };
+
   const renderTasks = (taskList: TaskType[]): JSX.Element[] => {
     return taskList.map((taskItem) => (
       <Task
@@ -37,6 +62,9 @@ const App = () => {
         task={taskItem}
         deleteTask={deleteTask}
         completeTask={completeTask}
+        setIsEditModeActive={setIsEditModeActive}
+        setIsLightboxOpen={setIsLightboxOpen}
+        setTaskToEdit={setTaskToEdit}
       />
     ));
   };
@@ -51,10 +79,15 @@ const App = () => {
         {renderTasks(completedTaskList)}
       </div>
       <div onClick={() => setIsLightboxOpen(true)}>
-        <h1>Click here</h1>
+        <h1 className="lightbox-trigger">Click here to add task</h1>
         {isLightboxOpen && (
           <Lightbox>
-            <TaskInput InputAddTask={addTask} />
+            <TaskInput
+              InputAddTask={addTask}
+              isEditModeActive={isEditModeActive}
+              taskToEdit={taskToEdit}
+              editTask={editTask}
+            />
           </Lightbox>
         )}
       </div>

@@ -1,12 +1,25 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { taskInputProps, TaskType } from "../types";
 
-const TaskInput = ({ InputAddTask }: taskInputProps) => {
+const TaskInput = ({
+  InputAddTask,
+  isEditModeActive,
+  taskToEdit,
+  editTask,
+}: taskInputProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>("");
   const [descInputValue, setDescInputValue] = useState<string>("");
   const [categoryInputValue, setCategoryInputValue] = useState<string>("");
+
+  useEffect(() => {
+    if (isEditModeActive && taskToEdit) {
+      setTitleInputValue(taskToEdit.title);
+      setDescInputValue(taskToEdit.description);
+      setCategoryInputValue(taskToEdit.category);
+    }
+  }, [isEditModeActive, taskToEdit]);
 
   const addTaskToList = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -30,7 +43,19 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
   };
 
   return (
-    <form onSubmit={(e) => addTaskToList(e)}>
+    <form
+      onSubmit={(e) => {
+        isEditModeActive && taskToEdit
+          ? editTask(
+              taskToEdit,
+              titleInputValue,
+              descInputValue,
+              categoryInputValue,
+              e
+            )
+          : addTaskToList(e);
+      }}
+    >
       <label htmlFor="title-input">Title</label>
       <input
         id="title-input"
@@ -57,7 +82,13 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
         onChange={(e) => onchangeHandler(e, setCategoryInputValue)}
         value={categoryInputValue}
       ></input>
-      <button type="submit">Add</button>
+      {isEditModeActive ? (
+        <div>
+          <button>Accept changes</button> <button>Decline changes</button>{" "}
+        </div>
+      ) : (
+        <button type="submit">Add</button>
+      )}
     </form>
   );
 };
