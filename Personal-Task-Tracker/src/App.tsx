@@ -48,7 +48,7 @@ const App = () => {
               description: descInput,
               category: categoryInput,
             }
-          : taskItem
+          : item
       )
     );
     setIsLightboxOpen(false);

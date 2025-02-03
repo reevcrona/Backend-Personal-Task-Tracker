@@ -83,9 +83,7 @@ const TaskInput = ({
         value={categoryInputValue}
       ></input>
       {isEditModeActive ? (
-        <div>
-          <button>Accept changes</button> <button>Decline changes</button>{" "}
-        </div>
+        <button type="submit">Accept changes</button>
       ) : (
         <button type="submit">Add</button>
       )}
