@@ -6,6 +6,7 @@ import { taskInputProps, TaskType } from "../types";
 const TaskInput = ({ InputAddTask }: taskInputProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>("");
   const [descInputValue, setDescInputValue] = useState<string>("");
+  const [categoryInputValue, setCategoryInputValue] = useState<string>("");
 
   const addTaskToList = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
@@ -13,6 +14,7 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
       title: titleInputValue,
       id: nanoid(),
       description: descInputValue,
+      category: categoryInputValue,
     };
     InputAddTask(newTask);
     setTitleInputValue("");
@@ -45,6 +47,14 @@ const TaskInput = ({ InputAddTask }: taskInputProps) => {
         placeholder="Task Description"
         onChange={(e) => onchangeHandler(e, setDescInputValue)}
         value={descInputValue}
+      ></input>
+      <label htmlFor="category-input"></label>
+      <input
+        id="category-input"
+        type="text"
+        placeholder="Task Category"
+        onChange={(e) => onchangeHandler(e, setCategoryInputValue)}
+        value={categoryInputValue}
       ></input>
       <button type="submit">Add</button>
     </form>

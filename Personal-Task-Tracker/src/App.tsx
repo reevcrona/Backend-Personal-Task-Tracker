@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import { TaskType } from "./types";
 import Task from "./Components/Task";
@@ -19,6 +18,7 @@ const App = () => {
       title={item.title}
       id={item.id}
       description={item.description}
+      category={item.category}
     />
   ));
   return (
