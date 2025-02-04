@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TaskType } from "./types";
 import Task from "./Components/Task";
 import TaskInput from "./Components/TaskInput";
@@ -15,21 +15,33 @@ const App = () => {
     setTaskList((prevState) => [...prevState, taskItem]);
     setIsLightboxOpen(false);
   };
+  useEffect(() => {
+    checkAvailableIndex();
+
+    console.log(taskList);
+    console.log(completedTaskList);
+    console.log(taskIndexTracker);
+  }, [taskList, taskIndexTracker]);
   const completeTask = (taskItem: TaskType): void => {
-    deleteTask(taskItem);
+    deleteTask(taskItem, false);
     const updatedTask: TaskType = {
       ...taskItem,
       isCompleted: !taskItem.isCompleted,
     };
     setCompletedTaskList((prevState) => [...prevState, updatedTask]);
   };
-  const deleteTask = (taskItem: TaskType): void => {
+  const deleteTask = (taskItem: TaskType, inUndoFunc: boolean): void => {
     const listToUpdate = taskItem.isCompleted
       ? setCompletedTaskList
       : setTaskList;
 
     listToUpdate((prevState) =>
       prevState.filter((item) => item.id !== taskItem.id)
+    );
+    setTaskIndexTracker(
+      taskList.length + completedTaskList.length - 1 < 0
+        ? 0
+        : taskList.length + completedTaskList.length - 1
     );
   };
   const editTask = (
@@ -56,13 +68,50 @@ const App = () => {
     setIsEditModeActive(false);
   };
   const undoTask = (taskItem: TaskType): void => {
-    deleteTask(taskItem);
+    deleteTask(taskItem, true);
     const updatedTask: TaskType = {
       ...taskItem,
       isCompleted: !taskItem.isCompleted,
     };
-    addTask(updatedTask);
+    setTaskList((prevState) => {
+      const updatedTaskList = [...prevState];
+      updatedTaskList.splice(updatedTask.index, 0, updatedTask);
+      return updatedTaskList;
+    });
   };
+
+  const checkAvailableIndex = () => {
+    let mergedArray = [...taskList, ...completedTaskList];
+
+    mergedArray.sort((a, b) => a.index - b.index);
+    for (let i = 0; i < mergedArray.length; i++) {
+      const currentTask = mergedArray[i];
+      const prevTask = mergedArray[i - 1];
+      const listToUpdate = currentTask.isCompleted
+        ? setCompletedTaskList
+        : setTaskList;
+
+      if (currentTask.index === 0) {
+        console.log(currentTask.id);
+        continue;
+      }
+      if (!prevTask) {
+        listToUpdate((prevState) =>
+          prevState.map((item) =>
+            item.id === currentTask.id ? { ...item, index: i } : item
+          )
+        );
+      } else if (currentTask.index - 1 !== prevTask.index) {
+        console.log(currentTask.id);
+        listToUpdate((prevState) =>
+          prevState.map((item) =>
+            item.id === currentTask.id ? { ...item, index: i } : item
+          )
+        );
+      }
+    }
+  };
+
   const renderTasks = (taskList: TaskType[]): JSX.Element[] => {
     return taskList.map((taskItem) => (
       <Task
@@ -77,6 +126,7 @@ const App = () => {
       />
     ));
   };
+
   return (
     <div>
       <div>

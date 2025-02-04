@@ -34,7 +34,7 @@ const TaskInput = ({
       index: taskIndexTracker,
     };
     InputAddTask(newTask);
-    setTaskIndexTracker((prevstate) => prevstate + 1);
+    setTaskIndexTracker((prevState) => prevState + 1);
     setTitleInputValue("");
     setDescInputValue("");
   };

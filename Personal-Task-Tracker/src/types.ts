@@ -10,7 +10,7 @@ export interface TaskType {
 }
 export interface TaskProps {
   task: TaskType;
-  deleteTask: (taskItem: TaskType) => void;
+  deleteTask: (taskItem: TaskType, inUndoFunc: boolean) => void;
   completeTask: (taskItem: TaskType) => void;
   undoTask: (taskItem: TaskType) => void;
   setTaskToEdit: React.Dispatch<React.SetStateAction<TaskType | null>>;
