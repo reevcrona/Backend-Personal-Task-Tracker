@@ -8,6 +8,8 @@ const TaskInput = ({
   isEditModeActive,
   taskToEdit,
   editTask,
+  taskIndexTracker,
+  setTaskIndexTracker,
 }: taskInputProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>("");
   const [descInputValue, setDescInputValue] = useState<string>("");
@@ -29,8 +31,10 @@ const TaskInput = ({
       description: descInputValue,
       category: categoryInputValue,
       isCompleted: false,
+      index: taskIndexTracker,
     };
     InputAddTask(newTask);
+    setTaskIndexTracker((prevstate) => prevstate + 1);
     setTitleInputValue("");
     setDescInputValue("");
   };

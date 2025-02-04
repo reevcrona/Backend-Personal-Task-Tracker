@@ -6,6 +6,7 @@ export interface TaskType {
   description: string;
   category: string;
   isCompleted: boolean;
+  index: number;
 }
 export interface TaskProps {
   task: TaskType;
@@ -27,6 +28,8 @@ export interface taskInputProps {
     categoryInput: string,
     e: React.FormEvent<HTMLFormElement>
   ) => void;
+  taskIndexTracker: number;
+  setTaskIndexTracker: React.Dispatch<React.SetStateAction<number>>;
 }
 export interface LightboxProps {
   children: JSX.Element;

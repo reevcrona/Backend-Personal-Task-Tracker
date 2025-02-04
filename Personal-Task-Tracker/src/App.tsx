@@ -10,6 +10,7 @@ const App = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
   const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskType | null>(null);
+  const [taskIndexTracker, setTaskIndexTracker] = useState<number>(0);
   const addTask = (taskItem: TaskType): void => {
     setTaskList((prevState) => [...prevState, taskItem]);
     setIsLightboxOpen(false);
@@ -95,6 +96,8 @@ const App = () => {
               isEditModeActive={isEditModeActive}
               taskToEdit={taskToEdit}
               editTask={editTask}
+              taskIndexTracker={taskIndexTracker}
+              setTaskIndexTracker={setTaskIndexTracker}
             />
           </Lightbox>
         )}
