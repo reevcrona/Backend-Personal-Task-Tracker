@@ -17,11 +17,10 @@ const App = () => {
   };
   useEffect(() => {
     checkAvailableIndex();
-
     console.log(taskList);
     console.log(completedTaskList);
     console.log(taskIndexTracker);
-  }, [taskList, taskIndexTracker]);
+  }, [taskList]);
   const completeTask = (taskItem: TaskType): void => {
     deleteTask(taskItem, false);
     const updatedTask: TaskType = {
@@ -75,8 +74,8 @@ const App = () => {
     };
     setTaskList((prevState) => {
       const updatedTaskList = [...prevState];
-      updatedTaskList.splice(updatedTask.index, 0, updatedTask);
-      return updatedTaskList;
+      updatedTaskList.push(updatedTask);
+      return updatedTaskList.sort((a, b) => a.index - b.index);
     });
   };
 
@@ -95,14 +94,7 @@ const App = () => {
         console.log(currentTask.id);
         continue;
       }
-      if (!prevTask) {
-        listToUpdate((prevState) =>
-          prevState.map((item) =>
-            item.id === currentTask.id ? { ...item, index: i } : item
-          )
-        );
-      } else if (currentTask.index - 1 !== prevTask.index) {
-        console.log(currentTask.id);
+      if (!prevTask || currentTask.index - 1 !== prevTask.index) {
         listToUpdate((prevState) =>
           prevState.map((item) =>
             item.id === currentTask.id ? { ...item, index: i } : item
