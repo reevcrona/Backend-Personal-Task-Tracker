@@ -35,12 +35,12 @@ const App = () => {
       : setTaskList;
 
     listToUpdate((prevState) =>
-      prevState.filter((item) => item.id !== taskItem.id)
+      prevState.filter((item) => item.id !== taskItem.id),
     );
     setTaskIndexTracker(
       taskList.length + completedTaskList.length - 1 < 0
         ? 0
-        : taskList.length + completedTaskList.length - 1
+        : taskList.length + completedTaskList.length - 1,
     );
   };
   const editTask = (
@@ -48,7 +48,7 @@ const App = () => {
     titleInput: string,
     descInput: string,
     categoryInput: string,
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
   ) => {
     e.preventDefault();
     setTaskList((prevState) =>
@@ -60,8 +60,8 @@ const App = () => {
               description: descInput,
               category: categoryInput,
             }
-          : item
-      )
+          : item,
+      ),
     );
     setIsLightboxOpen(false);
     setIsEditModeActive(false);
@@ -97,8 +97,8 @@ const App = () => {
       if (!prevTask || currentTask.index - 1 !== prevTask.index) {
         listToUpdate((prevState) =>
           prevState.map((item) =>
-            item.id === currentTask.id ? { ...item, index: i } : item
-          )
+            item.id === currentTask.id ? { ...item, index: i } : item,
+          ),
         );
       }
     }
@@ -120,17 +120,9 @@ const App = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Current tasks</h1>
-        {renderTasks(taskList)}
-      </div>
-      <div>
-        <h1>Completed tasks</h1>
-        {renderTasks(completedTaskList)}
-      </div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-green-900">
       <div onClick={() => setIsLightboxOpen(true)}>
-        <h1 className="lightbox-trigger">Click here to add task</h1>
+        <h1 className="text-white">Click here to add task</h1>
         {isLightboxOpen && (
           <Lightbox>
             <TaskInput
@@ -143,6 +135,17 @@ const App = () => {
             />
           </Lightbox>
         )}
+      </div>
+
+      <div className="flex flex-row gap-7">
+        <div>
+          <h1 className="text-white">Current tasks</h1>
+          {renderTasks(taskList)}
+        </div>
+        <div>
+          <h1 className="text-white">Completed tasks</h1>
+          {renderTasks(completedTaskList)}
+        </div>
       </div>
     </div>
   );
