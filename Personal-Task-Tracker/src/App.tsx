@@ -22,14 +22,14 @@ const App = () => {
     console.log(taskIndexTracker);
   }, [taskList]);
   const completeTask = (taskItem: TaskType): void => {
-    deleteTask(taskItem, false);
+    deleteTask(taskItem);
     const updatedTask: TaskType = {
       ...taskItem,
       isCompleted: !taskItem.isCompleted,
     };
     setCompletedTaskList((prevState) => [...prevState, updatedTask]);
   };
-  const deleteTask = (taskItem: TaskType, inUndoFunc: boolean): void => {
+  const deleteTask = (taskItem: TaskType): void => {
     const listToUpdate = taskItem.isCompleted
       ? setCompletedTaskList
       : setTaskList;
@@ -67,7 +67,7 @@ const App = () => {
     setIsEditModeActive(false);
   };
   const undoTask = (taskItem: TaskType): void => {
-    deleteTask(taskItem, true);
+    deleteTask(taskItem);
     const updatedTask: TaskType = {
       ...taskItem,
       isCompleted: !taskItem.isCompleted,

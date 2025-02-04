@@ -17,7 +17,7 @@ const Task = ({
       <h1>{task.title}</h1>
       <h3>{task.category}</h3>
       <h4>{task.description}</h4>
-      <button onClick={() => deleteTask(task, false)}>
+      <button onClick={() => deleteTask(task)}>
         <TiDeleteOutline />
       </button>
       {!task.isCompleted && (
