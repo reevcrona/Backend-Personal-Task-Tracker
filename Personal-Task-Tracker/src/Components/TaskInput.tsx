@@ -62,7 +62,7 @@ const TaskInput = ({
       }}
     >
       <h1 className="mb-5 text-2xl font-medium text-white">
-        Create your new task below
+        {isEditModeActive ? "Edit mode" : "Create your new task below"}
       </h1>
       <label
         className="w-full max-w-56 text-left font-medium text-white"
@@ -110,7 +110,7 @@ const TaskInput = ({
       ></input>
 
       <button
-        className="mt-6 flex h-9 w-20 items-center justify-center border-2 border-black bg-transparent text-lg font-medium text-white transition-colors duration-500 ease-in-out hover:bg-black"
+        className="mt-6 flex h-9 w-36 items-center justify-center border-2 border-black bg-transparent text-lg font-medium text-white transition-colors duration-500 ease-in-out hover:bg-black"
         type="submit"
       >
         {isEditModeActive ? "Accept changes" : "Add"}
