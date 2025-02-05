@@ -14,7 +14,7 @@ const TaskInput = ({
 }: taskInputProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>("");
   const [descInputValue, setDescInputValue] = useState<string>("");
-  const [categoryInputValue, setCategoryInputValue] = useState<string>("");
+  const [categoryInputValue, setCategoryInputValue] = useState<string>("Other");
 
   useEffect(() => {
     if (isEditModeActive && taskToEdit) {
@@ -91,6 +91,8 @@ const TaskInput = ({
       <textarea
         className="mb-2 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
         id="description-input"
+        required
+        minLength={1}
         onChange={(e) => onchangeHandler(e, setDescInputValue)}
         value={descInputValue}
       ></textarea>
@@ -102,6 +104,8 @@ const TaskInput = ({
       </label>
       <select
         onChange={(e) => onchangeHandler(e, setCategoryInputValue)}
+        required
+        value={categoryInputValue}
         className="mb-2 min-h-10 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
         name="category-select"
         id="category-select"
