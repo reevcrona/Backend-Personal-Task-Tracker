@@ -104,7 +104,6 @@ const TaskInput = ({
       </label>
       <select
         onChange={(e) => onchangeHandler(e, setCategoryInputValue)}
-        required
         value={categoryInputValue}
         className="mb-2 min-h-10 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
         name="category-select"
@@ -120,7 +119,7 @@ const TaskInput = ({
         className="mt-6 flex h-9 w-36 items-center justify-center border-2 border-black bg-transparent text-lg font-medium text-white transition-colors duration-500 ease-in-out hover:bg-black"
         type="submit"
       >
-        {isEditModeActive ? "Accept changes" : "Add"}
+        {isEditModeActive ? "Complete Edit" : "Create Task"}
       </button>
       <button
         type="button"

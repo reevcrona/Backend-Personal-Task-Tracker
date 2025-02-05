@@ -16,6 +16,7 @@ const App = () => {
     setIsLightboxOpen(false);
   };
   useEffect(() => {
+    if (taskList.length + completedTaskList.length === 0) return;
     checkAvailableIndex();
     console.log(taskList);
     console.log(completedTaskList);
@@ -85,7 +86,6 @@ const App = () => {
         : setTaskList;
 
       if (currentTask.index === 0) {
-        console.log(currentTask.id);
         continue;
       }
       if (!prevTask || currentTask.index - 1 !== prevTask.index) {
@@ -144,7 +144,7 @@ const App = () => {
       <div className="flex w-full flex-col items-center justify-center gap-7">
         <div className="flex min-h-96 w-full max-w-lg flex-col gap-3">
           <h2 className="mb-3 text-center text-3xl font-bold text-white">
-            Current tasks
+            Active tasks
           </h2>
           {renderTasks(taskList)}
         </div>
