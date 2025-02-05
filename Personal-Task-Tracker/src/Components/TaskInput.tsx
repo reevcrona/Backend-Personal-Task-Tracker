@@ -42,7 +42,10 @@ const TaskInput = ({
   };
 
   const onchangeHandler = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>,
     stateSetter: React.Dispatch<React.SetStateAction<string>>,
   ): void => {
     stateSetter(e.target.value);
@@ -63,17 +66,17 @@ const TaskInput = ({
           : addTaskToList(e);
       }}
     >
-      <h1 className="mb-5 text-2xl font-medium text-white">
+      <h1 className="mb-5 text-3xl font-medium text-white">
         {isEditModeActive ? "Edit mode" : "Create your new task below"}
       </h1>
       <label
-        className="w-full max-w-56 text-left font-medium text-white"
+        className="w-full max-w-80 text-left font-medium text-white"
         htmlFor="title-input"
       >
         Title
       </label>
       <input
-        className="mb-2 w-full max-w-56 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
+        className="mb-2 min-h-10 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
         id="title-input"
         type="text"
         required
@@ -83,33 +86,35 @@ const TaskInput = ({
         value={titleInputValue}
       ></input>
       <label
-        className="w-full max-w-56 text-left font-medium text-white"
+        className="w-full max-w-80 text-left font-medium text-white"
         htmlFor="description-input"
       >
         Description
       </label>
-      <input
-        className="mb-2 w-full max-w-56 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
+      <textarea
+        className="mb-2 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
         id="description-input"
-        type="text"
         placeholder="Task Description"
         onChange={(e) => onchangeHandler(e, setDescInputValue)}
         value={descInputValue}
-      ></input>
+      ></textarea>
       <label
-        className="w-full max-w-56 text-left font-medium text-white"
-        htmlFor="category-input"
+        className="w-full max-w-80 text-left font-medium text-white"
+        htmlFor="category-select"
       >
         Category
       </label>
-      <input
-        className="w-full max-w-56 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
-        id="category-input"
-        type="text"
-        placeholder="Task Category"
+      <select
         onChange={(e) => onchangeHandler(e, setCategoryInputValue)}
-        value={categoryInputValue}
-      ></input>
+        className="mb-2 min-h-10 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
+        name="category-select"
+        id="category-select"
+      >
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="School">School</option>
+        <option value="Other">Other</option>
+      </select>
 
       <button
         className="mt-6 flex h-9 w-36 items-center justify-center border-2 border-black bg-transparent text-lg font-medium text-white transition-colors duration-500 ease-in-out hover:bg-black"
