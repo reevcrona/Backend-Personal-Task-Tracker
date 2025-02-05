@@ -18,8 +18,6 @@ const App = () => {
   useEffect(() => {
     if (taskList.length + completedTaskList.length === 0) return;
     checkAvailableIndex();
-    console.log(taskList);
-    console.log(completedTaskList);
   }, [taskList]);
   const completeTask = (taskItem: TaskType): void => {
     deleteTask(taskItem);
