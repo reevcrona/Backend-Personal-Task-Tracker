@@ -11,7 +11,6 @@ const App = () => {
   const [isLightboxOpen, setIsLightboxOpen] = useState<boolean>(false);
   const [isEditModeActive, setIsEditModeActive] = useState<boolean>(false);
   const [taskToEdit, setTaskToEdit] = useState<TaskType | null>(null);
-  const [taskIndexTracker, setTaskIndexTracker] = useState<number>(0);
   const addTask = (taskItem: TaskType): void => {
     setTaskList((prevState) => [...prevState, taskItem]);
     setIsLightboxOpen(false);
@@ -20,7 +19,6 @@ const App = () => {
     checkAvailableIndex();
     console.log(taskList);
     console.log(completedTaskList);
-    console.log(taskIndexTracker);
   }, [taskList]);
   const completeTask = (taskItem: TaskType): void => {
     deleteTask(taskItem);
@@ -37,11 +35,6 @@ const App = () => {
 
     listToUpdate((prevState) =>
       prevState.filter((item) => item.id !== taskItem.id),
-    );
-    setTaskIndexTracker(
-      taskList.length + completedTaskList.length - 1 < 0
-        ? 0
-        : taskList.length + completedTaskList.length - 1,
     );
   };
   const editTask = (
@@ -121,13 +114,13 @@ const App = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-stone-900">
-      <div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-purple-950">
+      <div className="w-full">
         <div
           onClick={() => setIsLightboxOpen(true)}
-          className="flex items-center justify-center"
+          className="mb-8 mt-8 flex items-center justify-center"
         >
-          <h1 className="mr-2 text-white hover:cursor-pointer">
+          <h1 className="mr-2 text-3xl text-white hover:cursor-pointer">
             Click here to add a task
           </h1>
           <button className="border-2 border-white p-1 text-white hover:border-green-600 hover:text-green-600">
@@ -141,21 +134,25 @@ const App = () => {
               isEditModeActive={isEditModeActive}
               taskToEdit={taskToEdit}
               editTask={editTask}
-              taskIndexTracker={taskIndexTracker}
-              setTaskIndexTracker={setTaskIndexTracker}
               setIsLightboxOpen={setIsLightboxOpen}
+              setIsEditModeActive={setIsEditModeActive}
             />
           </Lightbox>
         )}
       </div>
 
-      <div className="flex w-full flex-row items-center justify-center gap-7">
-        <div className="flex min-h-60 w-full max-w-lg flex-col gap-3">
-          <h1 className="text-center text-white">Current tasks</h1>
+      <div className="flex w-full flex-col items-center justify-center gap-7">
+        <div className="flex min-h-96 w-full max-w-lg flex-col gap-3">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">
+            Current tasks
+          </h2>
           {renderTasks(taskList)}
         </div>
-        <div className="flex min-h-60 w-full max-w-96 flex-col gap-3">
-          <h1 className="text-center text-white">Completed tasks</h1>
+
+        <div className="flex min-h-96 w-full max-w-lg flex-col gap-3">
+          <h2 className="mb-3 text-center text-3xl font-bold text-white">
+            Completed tasks
+          </h2>
           {renderTasks(completedTaskList)}
         </div>
       </div>

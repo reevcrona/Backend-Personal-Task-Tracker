@@ -28,8 +28,7 @@ export interface taskInputProps {
     categoryInput: string,
     e: React.FormEvent<HTMLFormElement>,
   ) => void;
-  taskIndexTracker: number;
-  setTaskIndexTracker: React.Dispatch<React.SetStateAction<number>>;
+  setIsEditModeActive: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLightboxOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface LightboxProps {

@@ -9,9 +9,8 @@ const TaskInput = ({
   isEditModeActive,
   taskToEdit,
   editTask,
-  taskIndexTracker,
-  setTaskIndexTracker,
   setIsLightboxOpen,
+  setIsEditModeActive,
 }: taskInputProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>("");
   const [descInputValue, setDescInputValue] = useState<string>("");
@@ -33,10 +32,9 @@ const TaskInput = ({
       description: descInputValue,
       category: categoryInputValue,
       isCompleted: false,
-      index: taskIndexTracker,
+      index: Infinity,
     };
     InputAddTask(newTask);
-    setTaskIndexTracker((prevState) => prevState + 1);
     setTitleInputValue("");
     setDescInputValue("");
   };
@@ -53,7 +51,7 @@ const TaskInput = ({
 
   return (
     <form
-      className="relative flex min-h-96 w-full max-w-xl flex-col items-center justify-center rounded bg-green-500 p-6"
+      className="relative flex min-h-96 w-full max-w-xl flex-col items-center justify-center rounded bg-violet-900 p-6"
       onSubmit={(e) => {
         isEditModeActive && taskToEdit
           ? editTask(
@@ -122,7 +120,10 @@ const TaskInput = ({
       </button>
       <button
         type="button"
-        onClick={() => setIsLightboxOpen(false)}
+        onClick={() => {
+          setIsLightboxOpen(false);
+          setIsEditModeActive(false);
+        }}
         className="absolute right-6 top-6 z-50 rounded-md border-2 border-white p-0.5 text-white hover:border-black hover:text-black"
       >
         <RxCross1 />
