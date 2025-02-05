@@ -120,7 +120,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-green-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-stone-900">
       <div onClick={() => setIsLightboxOpen(true)}>
         <h1 className="text-white">Click here to add task</h1>
         {isLightboxOpen && (
@@ -137,13 +137,13 @@ const App = () => {
         )}
       </div>
 
-      <div className="flex flex-row gap-7">
-        <div>
-          <h1 className="text-white">Current tasks</h1>
+      <div className="flex w-full flex-row items-center justify-center gap-7">
+        <div className="flex min-h-60 w-full max-w-96 flex-col gap-3">
+          <h1 className="text-center text-white">Current tasks</h1>
           {renderTasks(taskList)}
         </div>
-        <div>
-          <h1 className="text-white">Completed tasks</h1>
+        <div className="flex min-h-60 w-full max-w-96 flex-col gap-3">
+          <h1 className="text-center text-white">Completed tasks</h1>
           {renderTasks(completedTaskList)}
         </div>
       </div>
