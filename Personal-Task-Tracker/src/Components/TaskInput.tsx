@@ -53,7 +53,7 @@ const TaskInput = ({
 
   return (
     <form
-      className="relative flex min-h-96 w-full max-w-xl flex-col items-center justify-center rounded bg-green-500"
+      className="relative flex min-h-96 w-full max-w-xl flex-col items-center justify-center rounded bg-green-500 p-6"
       onSubmit={(e) => {
         isEditModeActive && taskToEdit
           ? editTask(
@@ -70,23 +70,22 @@ const TaskInput = ({
         {isEditModeActive ? "Edit mode" : "Create your new task below"}
       </h1>
       <label
-        className="w-full max-w-80 text-left font-medium text-white"
+        className="w-full max-w-80 text-left text-lg font-medium text-white"
         htmlFor="title-input"
       >
-        Title
+        Task Title
       </label>
       <input
-        className="mb-2 min-h-10 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
+        className="mb-2 min-h-10 w-full max-w-80 rounded border-2 border-black p-2 pl-1 text-lg placeholder-black focus:placeholder-transparent focus:outline-none"
         id="title-input"
         type="text"
         required
         minLength={1}
-        placeholder="Task Title"
         onChange={(e) => onchangeHandler(e, setTitleInputValue)}
         value={titleInputValue}
       ></input>
       <label
-        className="w-full max-w-80 text-left font-medium text-white"
+        className="w-full max-w-80 text-left text-lg font-medium text-white"
         htmlFor="description-input"
       >
         Description
@@ -94,12 +93,11 @@ const TaskInput = ({
       <textarea
         className="mb-2 w-full max-w-80 rounded border-2 border-black pl-1 placeholder-black focus:placeholder-transparent focus:outline-none"
         id="description-input"
-        placeholder="Task Description"
         onChange={(e) => onchangeHandler(e, setDescInputValue)}
         value={descInputValue}
       ></textarea>
       <label
-        className="w-full max-w-80 text-left font-medium text-white"
+        className="w-full max-w-80 text-left text-lg font-medium text-white"
         htmlFor="category-select"
       >
         Category
