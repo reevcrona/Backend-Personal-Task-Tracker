@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import { taskInputProps, TaskType } from "../types";
+import { RxCross1 } from "react-icons/rx";
 
 const TaskInput = ({
   InputAddTask,
@@ -10,6 +11,7 @@ const TaskInput = ({
   editTask,
   taskIndexTracker,
   setTaskIndexTracker,
+  setIsLightboxOpen,
 }: taskInputProps) => {
   const [titleInputValue, setTitleInputValue] = useState<string>("");
   const [descInputValue, setDescInputValue] = useState<string>("");
@@ -48,7 +50,7 @@ const TaskInput = ({
 
   return (
     <form
-      className="flex min-h-96 w-full max-w-xl flex-col items-center justify-center rounded bg-green-500"
+      className="relative flex min-h-96 w-full max-w-xl flex-col items-center justify-center rounded bg-green-500"
       onSubmit={(e) => {
         isEditModeActive && taskToEdit
           ? editTask(
@@ -114,6 +116,13 @@ const TaskInput = ({
         type="submit"
       >
         {isEditModeActive ? "Accept changes" : "Add"}
+      </button>
+      <button
+        type="button"
+        onClick={() => setIsLightboxOpen(false)}
+        className="absolute right-6 top-6 z-50 rounded-md border-2 border-white p-0.5 text-white hover:border-black hover:text-black"
+      >
+        <RxCross1 />
       </button>
     </form>
   );

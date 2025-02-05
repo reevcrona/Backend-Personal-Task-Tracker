@@ -26,10 +26,11 @@ export interface taskInputProps {
     titleInput: string,
     descInput: string,
     categoryInput: string,
-    e: React.FormEvent<HTMLFormElement>
+    e: React.FormEvent<HTMLFormElement>,
   ) => void;
   taskIndexTracker: number;
   setTaskIndexTracker: React.Dispatch<React.SetStateAction<number>>;
+  setIsLightboxOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface LightboxProps {
   children: JSX.Element;

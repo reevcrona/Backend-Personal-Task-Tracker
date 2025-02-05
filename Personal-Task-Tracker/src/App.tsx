@@ -3,6 +3,7 @@ import { TaskType } from "./types";
 import Task from "./Components/Task";
 import TaskInput from "./Components/TaskInput";
 import Lightbox from "./Components/Lightbox";
+import { FaPlus } from "react-icons/fa6";
 
 const App = () => {
   const [taskList, setTaskList] = useState<TaskType[]>([]);
@@ -121,8 +122,18 @@ const App = () => {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-stone-900">
-      <div onClick={() => setIsLightboxOpen(true)}>
-        <h1 className="text-white">Click here to add task</h1>
+      <div>
+        <div
+          onClick={() => setIsLightboxOpen(true)}
+          className="flex items-center justify-center"
+        >
+          <h1 className="mr-2 text-white hover:cursor-pointer">
+            Click here to add a task
+          </h1>
+          <button className="border-2 border-white p-1 text-white hover:border-green-600 hover:text-green-600">
+            <FaPlus />
+          </button>
+        </div>
         {isLightboxOpen && (
           <Lightbox>
             <TaskInput
@@ -132,6 +143,7 @@ const App = () => {
               editTask={editTask}
               taskIndexTracker={taskIndexTracker}
               setTaskIndexTracker={setTaskIndexTracker}
+              setIsLightboxOpen={setIsLightboxOpen}
             />
           </Lightbox>
         )}
