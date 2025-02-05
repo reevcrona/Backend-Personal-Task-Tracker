@@ -150,7 +150,7 @@ const App = () => {
       </div>
 
       <div className="flex w-full flex-row items-center justify-center gap-7">
-        <div className="flex min-h-60 w-full max-w-96 flex-col gap-3">
+        <div className="flex min-h-60 w-full max-w-lg flex-col gap-3">
           <h1 className="text-center text-white">Current tasks</h1>
           {renderTasks(taskList)}
         </div>
